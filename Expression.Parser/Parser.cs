@@ -92,7 +92,6 @@ namespace Expression.Parser
                     {
                         op = '~';
                     }
-
                     //	pop every operator taking into account their priorities
                     while (operatorsStack.Count > 0 && (_operationPriority[operatorsStack.Peek()] >= _operationPriority[op]))
                     {
@@ -101,7 +100,6 @@ namespace Expression.Parser
                     operatorsStack.Push(op);
                 }
             }
-
             // to output string the rest of the operators
             foreach (char op in operatorsStack)
             {
@@ -143,6 +141,7 @@ namespace Expression.Parser
         public double CalculateExpression()
         {
             bool isInverted = false;
+
             //	A stack for numbers storing
             Stack<double> locals = new();
 
@@ -165,11 +164,9 @@ namespace Expression.Parser
 
                     double second = Sign(ref isInverted) * (locals.Count > 0 ? locals.Pop() : 0),
                     first = locals.Count > 0 ? locals.Pop() : 0;
-
                     locals.Push(ExecuteExpression(c, first, second));
                 }
             }
-
             return locals.Pop();
         }
     }
